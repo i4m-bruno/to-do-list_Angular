@@ -1,8 +1,8 @@
-<section id="lista-container" class="container">
-  <ul>
-    <li>
-      <input type="checkbox" />
-      <input type="text" />
+<section [ngClass]="{ loading: !taskList.length }">
+  <ul *ngIf="taskList.length">
+    <li *ngFor="let item of taskList; let i = index">
+      <input type="checkbox" [(ngModel)]="item.checked" />
+      <input type="text" [(ngModel)]="item.task" />
       <button>
         <img src="/assets/icons/icon-trash.svg" alt="lixeira" />
       </button>
@@ -10,4 +10,4 @@
   </ul>
 </section>
 <app-input-add-itens></app-input-add-itens>
-<app-delete-all-button></app-delete-all-button>
+<app-delete-all-button *ngIf="taskList.length"></app-delete-all-button>
