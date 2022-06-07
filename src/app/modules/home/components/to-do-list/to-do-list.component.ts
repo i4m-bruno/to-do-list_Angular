@@ -8,10 +8,9 @@ import { TaskList } from '../../Models/task-list';
 })
 export class ToDoListComponent implements DoCheck {
   //
-  public taskList: Array<TaskList> = [
-    { task: 'Primeira tarefa', checked: true },
-    { task: 'Segunda tarefa', checked: false },
-  ];
+  public taskList: Array<TaskList> = JSON.parse(
+    localStorage.getItem('list') || '[]'
+  );
 
   constructor() {}
   //
@@ -19,6 +18,7 @@ export class ToDoListComponent implements DoCheck {
     this.taskList.sort(
       (first, last) => Number(first.checked) - Number(last.checked)
     );
+    this.setLocalStorage();
   }
 
   public setEmitTaskList(event: string) {
@@ -44,6 +44,12 @@ export class ToDoListComponent implements DoCheck {
       if (confirm) {
         this.deleteItemTaskList(index);
       }
+    }
+  }
+
+  public setLocalStorage() {
+    if (this.taskList) {
+      localStorage.setItem('list', JSON.stringify(this.taskList));
     }
   }
 }
