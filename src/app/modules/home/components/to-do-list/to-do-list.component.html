@@ -3,11 +3,14 @@
     <li *ngFor="let item of taskList; let i = index">
       <input type="checkbox" [(ngModel)]="item.checked" />
       <input type="text" [(ngModel)]="item.task" />
-      <button>
+      <button (click)="deleteItemTaskList(i)">
         <img src="/assets/icons/icon-trash.svg" alt="lixeira" />
       </button>
     </li>
   </ul>
 </section>
 <app-input-add-itens></app-input-add-itens>
-<app-delete-all-button *ngIf="taskList.length"></app-delete-all-button>
+<app-delete-all-button
+  *ngIf="taskList.length"
+  (click)="deleteAllTaskList()"
+></app-delete-all-button>
